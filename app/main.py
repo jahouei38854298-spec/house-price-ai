@@ -1,11 +1,14 @@
+
 from pathlib import Path
 
 import joblib
 import pandas as pd
 
-from fastapi import FastAPI , HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
-from app.schemas import HouseInput , HousePrediction
+from app.schemas import HouseInput, HousePrediction
 
 
 # مسیر اصلی پروژه
@@ -14,34 +17,51 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # مسیر فایل مدل
 MODEL_PATH = BASE_DIR / "models" / "final_house_model.pkl"
 
-
 # بارگذاری مدل
 model = joblib.load(MODEL_PATH)
 
 
 # ساخت برنامه FastAPI
-app = FastAPI()
+app = FastAPI(
+    title="House Price Prediction API",
+    version="1.0.0"
+)
 
 
-# صفحه اصلی API
+# اتصال پوشه static
+app.mount(
+    "/static",
+    StaticFiles(directory=BASE_DIR / "static"),
+    name="static"
+)
+
+
+# تنظیم مسیر قالب‌های HTML
+templates = Jinja2Templates(
+    directory=BASE_DIR / "templates"
+)
+
+
+# صفحه اصلی وب
 @app.get("/")
-def home():
-    return {
-        "message": "House Price Prediction API is running"
-    }
+def home(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={}
+    )
 
 
-
+# بررسی سلامت API
 @app.get("/health")
 def health_check():
     return {
-        "status" : "healthy" ,
-        "model_loaded" : model is not None
+        "status": "healthy",
+        "model_loaded": model is not None
     }
 
 
-
-# مسیر پیش‌بینی قیمت خانه
+# پیش‌بینی قیمت خانه
 @app.post("/predict", response_model=HousePrediction)
 def predict_price(house: HouseInput):
 
@@ -60,10 +80,9 @@ def predict_price(house: HouseInput):
             "age": house.age,
             "predicted_price": round(float(prediction[0]), 2)
         }
-    except Exception as error :
+
+    except Exception as error:
         raise HTTPException(
-            status_code= 500 ,
-            detail= " خطا در انجام پیش بینی قیمت خانه"
-    
+            status_code=500,
+            detail="خطا در انجام پیش‌بینی قیمت خانه"
         ) from error
-    

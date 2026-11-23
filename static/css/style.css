@@ -1,0 +1,152 @@
+
+/* تنظیمات عمومی صفحه */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* بدنه صفحه */
+body {
+    font-family: Tahoma, sans-serif;
+    background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* کارت اصلی */
+.container {
+    background-color: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* عنوان */
+h1 {
+    color: #1e3a8a;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+/* توضیحات */
+.description {
+    color: #64748b;
+    text-align: center;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* گروه ورودی‌ها */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* برچسب */
+label {
+    display: block;
+    color: #334155;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* ورودی‌ها */
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+/* حالت تمرکز روی ورودی */
+input:focus {
+    border-color: #2563eb;
+}
+
+/* دکمه */
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* حالت قرار گرفتن ماوس روی دکمه */
+button:hover {
+    background-color: #1d4ed8;
+}
+
+/* محل نمایش نتیجه */
+.result {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.8;
+}
+
+
+/* وضعیت دکمه هنگام محاسبه */
+button:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+}
+
+/* نتیجه موفق */
+.result.success {
+    color: #15803d;
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* نمایش خطا */
+.result.error {
+    color: #b91c1c;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* وضعیت انتظار */
+.result.loading {
+    color: #1d4ed8;
+    background-color: #eff6ff;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+
+/* دکمه پاک کردن فرم */
+.reset-button {
+    display: block;
+    width: 45%;
+    margin: 12px auto 0;
+    padding: 10px;
+    background-color: #64748b;
+    color: white;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+/* حالت قرار گرفتن ماوس */
+.reset-button:hover {
+    background-color: #475569;
+}
